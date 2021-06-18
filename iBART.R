@@ -150,7 +150,6 @@ iBART <- function(X = NULL, y = NULL,
   for (i in 1:iter) {
     cat(paste("Iteration", i, "\n", sep = " "))
     cat("iBART descriptor selection... \n")
-    iBART_gen_size[i] = ncol(X)
     ### BART variable selection
     if (i == 1) {
       BART_selection <- BART_iter(X = X, y = y,
