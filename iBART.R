@@ -249,16 +249,16 @@ iBART <- function(X = NULL, y = NULL,
     y_test <- y[-train_idx]
   }
   
-  # LS <- lm(y_train ~ ., data = as.data.frame(cbind(y_train, X_train)))
-  # coef <- as.vector(LS$coefficients)
-  # coef[is.na(coef)] <- 0
-  # yhat_train <- cbind(rep(1, length(y_train)), X_train) %*% coef
-  # LS_in_sample_RMSE <- sqrt(mean((yhat_train - y_train)^2))
-  # 
-  # if (!is.null(train_idx)) {
-  #   yhat_test <- cbind(rep(1, length(y_test)), X_test) %*% coef
-  #   LS_out_sample_RMSE <- sqrt(mean((yhat_test - y_test)^2))
-  # }
+  LS <- lm(y_train ~ ., data = as.data.frame(cbind(y_train, X_train)))
+  coef <- as.vector(LS$coefficients)
+  coef[is.na(coef)] <- 0
+  yhat_train <- cbind(rep(1, length(y_train)), X_train) %*% coef
+  LS_in_sample_RMSE <- sqrt(mean((yhat_train - y_train)^2))
+
+  if (!is.null(train_idx)) {
+    yhat_test <- cbind(rep(1, length(y_test)), X_test) %*% coef
+    LS_out_sample_RMSE <- sqrt(mean((yhat_test - y_test)^2))
+  }
   
   if (Lzero == TRUE){
     #### L-zero regression

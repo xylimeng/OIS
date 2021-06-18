@@ -1,6 +1,6 @@
 set.seed(123) # seed = 123 for p = 10, 20, 50, 100
-# seed = 1234 for p = 200
-options(java.parameters = "-Xmx25g")
+              # seed = 1234 for p = 200
+options(java.parameters = "-Xmx10g")
 library(bartMachine)
 library(glmnet)
 source("iBART.R")
@@ -47,8 +47,6 @@ BART_gen_size <- BART_sel_size <- matrix(0, nrow = 50, ncol = 4)
 
 n <- 250
 p <- 10 # change p here to reproduce results in Section 3.5
-num_reps_for_avg <- c(10, 10, 10)
-num_permute_samples <- c(50, 50, 50)
 
 for (j in 1:50) {
   set.seed(seeds[j])
@@ -91,8 +89,6 @@ for (j in 1:50) {
   BART_aic_F1[j] <- F1(BART_aic_precision[j], BART_aic_recall[j])
   
   save.image(file = "Sim_iBART.RData")
-  cat("Iteration: ", j, "/50... \n", sep = "")
+  cat("Finished iteration: ", j, "/50... \n", sep = "")
 }
 boxplot(BART_F1, BART_aic_F1) # F1 boxplot
-boxplot(BART_TP, BART_aic_TP) # TP boxplot
-boxplot(BART_FP, BART_aic_FP) # FP boxplot

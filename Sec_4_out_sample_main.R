@@ -1,4 +1,4 @@
-options(java.parameters = "-Xmx25g") # Allocate 10GB of memory for Java
+options(java.parameters = "-Xmx10g") # Allocate 10GB of memory for Java
 library(bartMachine)
 library(glmnet)
 source("iBART.R")
