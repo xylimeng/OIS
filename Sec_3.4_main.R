@@ -1,6 +1,6 @@
 set.seed(123) # seed = 123 for p = 10, 20, 50, 100
               # seed = 1234 for p = 200
-options(java.parameters = "-Xmx10g")
+options(java.parameters = "-Xmx10g") # Allocate 10GB of memory for Java
 library(bartMachine)
 library(glmnet)
 source("iBART.R")
@@ -68,7 +68,7 @@ for (j in 1:50) {
                          standardize = FALSE,
                          writeLog = FALSE,
                          count = j,
-                         seed = seeds[j])
+                         seed = 99)
   BART_gen_size[j, ] <- iBART_results$iBART_gen_size
   BART_sel_size[j, ] <- iBART_results$iBART_sel_size
   
@@ -87,8 +87,7 @@ for (j in 1:50) {
   BART_aic_precision[j] <- Precision(BART_aic_TP[j], BART_aic_FP[j])
   BART_aic_recall[j] <- Recall(BART_aic_TP[j], BART_aic_FN[j])
   BART_aic_F1[j] <- F1(BART_aic_precision[j], BART_aic_recall[j])
-  
-  save.image(file = "Sim_iBART.RData")
+
   cat("Finished iteration: ", j, "/50... \n", sep = "")
 }
 boxplot(BART_F1, BART_aic_F1) # F1 boxplot
