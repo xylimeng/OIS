@@ -23,6 +23,74 @@ Variable and Operator Selection for feature engineering.
 - Run `Sec_4_full_data_main.R` to reproduce the results trained on full data.
 - Run `Sec_4_out_sample_main.R` to reproduce the out-of-sample results.
 
+## Reproduce Section 4 Plots
+```
+options(java.parameters = "-Xmx10g") # Allocate 10GB of memory for Java
+library(bartMachine)
+library(glmnet)
+library(ggplot2)
+library(ggpubr)
+source("iBART.R")
+load("Connor_data.RData")
+
+# Run iBART
+iBART_results <- iBART(X = X, y = y, 
+                       head = head, 
+                       dimen = dimen, 
+                       opt = 2, # binary operator first
+                       iter = 3,
+                       out_sample = FALSE, 
+                       train_ratio = 1, 
+                       K = 5,
+                       writeLog = TRUE, 
+                       count = NULL, 
+                       seed = 888)
+
+# Print in sample RMSE for the best subset selection models
+in_sample_RMSE <- iBART_results$Lzero_in_sample_RMSE
+names(in_sample_RMSE) <- c("1 Descriptor", "2 Descriptors", "3 Descriptors",
+                           "4 Descriptors", "5 Descriptors")
+in_sample_RMSE
+
+# Plot y vs yhat
+plots <- list()
+for (i in 1:5) {
+  fitted_data <- data.frame(y = y,
+                            y_hat = iBART_results$Lzero_model[[i]]$fitted.values)
+  plots[[i]] <- ggplot(fitted_data, aes(x = y_hat, y = y)) +
+    geom_point() +
+    geom_abline() +
+    xlim(c(min(fitted_data$y_hat, fitted_data$y) - 0.2, max(fitted_data$y_hat, fitted_data$y) + 0.2)) +
+    ylim(c(min(fitted_data$y_hat, fitted_data$y) - 0.2, max(fitted_data$y_hat, fitted_data$y) + 0.2)) +
+    xlab("") +
+    ylab("") +
+    annotate("text", x = -12, y = -3, parse = TRUE,
+             label = paste("R^{2} ==", round(summary(iBART_results$Lzero_model[[i]])$r.squared, 4)))
+}
+label <- sapply(1:5, function(x) paste(x, "D", sep = ""))
+fig <- ggarrange(plotlist = plots,
+                 labels = label)
+annotate_figure(fig,
+                bottom = text_grob("Predicted binding energy from descriptors (eV)"),
+                left = text_grob("DFT binding energy (eV)", rot = 90))
+fig
+
+# Generate size plot
+iteration <- rep(0:3, 2)
+type <- rep(c("Selected", "Generated"), each = 4)
+size <- c(iBART_results$iBART_sel_size, iBART_results$iBART_gen_size)
+iBART_data <- data.frame(size, type, iteration)
+ggplot(iBART_data, aes(x = iteration, y = size,
+                       colour = type, group = type)) +
+  theme(text = element_text(size = 15)) +
+  geom_line(size = 1) +
+  geom_point(size = 3, shape = 21, fill = "white") +
+  geom_text(data = iBART_data, aes(label = size, y = size + 5, group = type),
+            position = position_dodge(0), size = 5, colour = "blue") +
+  labs(x = "Iteration", y = "Number of descriptors") +
+  scale_x_continuous(breaks = (0:4))
+
+```
 
 # R Session Info
 ```
