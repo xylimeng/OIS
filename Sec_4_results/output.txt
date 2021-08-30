@@ -1,0 +1,88 @@
+seed: 888
+LASSO in-sample RMSE:
+0.466558756146376
+
+
+Selected Descriptors:
+(s_EA*Hf)
+(m_n13*m_Chi_MB_un)
+(Hf*Oxv)
+(((Hs-Hf)*s_EA)*|(Oxv-s_ion_4)|)
+((Hs-Hf)/Hf)
+(m_n13/s_phi)
+(Hf/Oxv)
+(((Hs-Hf)*s_EA)/(m_N_val/CMS))
+(s_ion_3/Hf)
+((m_n13/m_N_val)/(m_N_val/CMS))
+((m_n13/m_N_val)/(m_N_val/s_ion_4))
+|((Hs-Hf)/Oxv)|
+|(m_n13/Oxv)|
+|(Hf/Oxv)|
+|(CMS/Hf)|
+|(s_ion_3/Hf)|
+|(|(Oxv-s_ion_4)|^0.5/Hf)|
+|(((Hs-Hf)*s_EA)/Oxv)|
+|((m_n13/m_N_val)/Oxv)|
+
+
+----------------
+No of descriptors: 1
+----------------
+RMSE in-sample: 0.929038903492052
+
+
+Descriptors:
+|((Hs-Hf)/Oxv)|
+
+
+----------------
+No of descriptors: 2
+----------------
+RMSE in-sample: 0.663691738393878
+
+
+Descriptors:
+(((Hs-Hf)*s_EA)/(m_N_val/CMS))
+|((Hs-Hf)/Oxv)|
+
+
+----------------
+No of descriptors: 3
+----------------
+RMSE in-sample: 0.623654969056813
+
+
+Descriptors:
+(s_EA*Hf)
+|((Hs-Hf)/Oxv)|
+|((m_n13/m_N_val)/Oxv)|
+
+
+----------------
+No of descriptors: 4
+----------------
+RMSE in-sample: 0.571902387257023
+
+
+Descriptors:
+(s_EA*Hf)
+(m_n13/s_phi)
+((m_n13/m_N_val)/(m_N_val/s_ion_4))
+|(((Hs-Hf)*s_EA)/Oxv)|
+
+
+----------------
+No of descriptors: 5
+----------------
+RMSE in-sample: 0.533037072718793
+
+
+Descriptors:
+(m_n13/s_phi)
+(Hf/Oxv)
+(((Hs-Hf)*s_EA)/(m_N_val/CMS))
+((m_n13/m_N_val)/(m_N_val/s_ion_4))
+|((Hs-Hf)/Oxv)|
+
+
+Time: 3.89292118549347
