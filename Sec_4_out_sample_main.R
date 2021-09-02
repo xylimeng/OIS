@@ -33,7 +33,7 @@ for(seed in seeds){
   time[count] <- iBART_results$runtime
   cat(paste("Finished iteration: ", count, "/50", sep = ""))
   count <- count + 1
-  save.image(file = "Connor_iBART_out_sample.RData")
+  # save.image(file = "Connor_iBART_out_sample.RData")
 }
 colMeans(RMSE_out_sample)
 boxplot(RMSE_out_sample) # Out-of-sample RMSE plot for k = 1,2,3,4,5
