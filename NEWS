@@ -1,0 +1,139 @@
+================================================================================
+
+iBART v0.0.3.3 (Release date: 2023-10-23)
+
+Changes:
+
+* Remove ABCForest dependency
+* Rename input "dimen" to "unit"
+
+================================================================================
+
+iBART v0.0.3.2 (Release date: 2023-07-12)
+
+Changes:
+
+* Fixed pre_screen feature
+* Users can now supplement their training and testing indices.
+
+================================================================================
+
+iBART v0.0.3.1 (Release date: 2023-04-11)
+
+Changes:
+
+* Various bugs fixed
+
+================================================================================
+
+iBART v0.0.2.7 (Release date: 2022-05-16)
+
+Changes:
+
+* Add permutation for ABC forest
+
+================================================================================
+
+iBART v0.0.2.6 (Release date: 2022-05-14)
+
+Changes:
+
+* Bugs fixed
+
+================================================================================
+
+iBART v0.0.2.5 (Release date: 2022-05-05)
+
+Changes:
+
+* Added a new BART-based variable selection procedure - ABC Bayesian Forest
+
+================================================================================
+
+iBART v0.0.2.4 (Release date: 2022-04-04)
+
+Changes:
+
+* Added an option to hold BART variable selection in each iBART iteration.
+
+================================================================================
+
+iBART v0.0.2.3 (Release date: 2022-03-30)
+
+Changes:
+
+* Fixed a bug to skip Lzero if iBART only selected 1 descriptor.
+* Removed least-squares model.
+* Added in sample and out of sample RMSE outputs of iBART+l0 AIC.
+
+================================================================================
+
+iBART v0.0.2.2 (Release date: 2022-03-07)
+
+Changes:
+
+* If iBART didn't select any features in 2 consecutive iterations, it will report
+  the latest good results.
+
+================================================================================
+
+iBART v0.0.2.1 (Release date: 2021-10-28)
+
+Changes:
+
+* Remove changes from iBART v0.0.2.0
+* Add options to select variable selection criterion used by bartMachine. Three
+  options are available: "global_se", "global_max", and "local". The default
+  criterion is "global_se". See var_selection_by_permute in R package bartMachine
+  for more detail.
+
+================================================================================
+
+iBART v0.0.2.0 (Release date: 2021-08-31)
+
+Changes:
+
+* Added progress bar function for R shiny application.
+* Added Lzero_descriptor to output the values of the selected descriptors.
+
+================================================================================
+
+iBART v0.0.1.9 (Release date: 2021-08-05)
+
+Changes:
+
+* Added warnings for applying binary operators with less than 2 columns and for
+  applying unary operators with no columns.
+
+================================================================================
+
+iBART v0.0.1.8 (Release date: 2021-07-14)
+
+Changes:
+
+* Corrected issue when BART-G.SE only selects one variable
+
+================================================================================
+
+iBART v0.0.1.7 (Release date: 2021-07-05)
+
+Changes:
+
+* Corrected standardize for lm
+
+================================================================================
+
+iBART v0.0.1.6 (Release date: 2021-06-25)
+
+Changes:
+
+* Tested for R 4.1.0 and glmnet v4.1-2
+
+================================================================================
+
+iBART v0.0.1.5 (Release date: 2021-06-23)
+
+Changes:
+
+* Bugs fixed.
+
