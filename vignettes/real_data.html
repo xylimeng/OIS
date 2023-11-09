@@ -345,17 +345,20 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The single-atom catalysis data is stored in
 <code>data/single_atom_catalysis.RData</code>, and the raw data is
 available at <a href="https://github.com/tsenftle/Metal-Oxide-LASSO-lo">this Github
-repo</a>. In this vignette, we will demonstrate how to use
-<strong>iBART</strong> to find an interpretable model with high
-predictive performance for the metal/oxide binding energy <span class="math inline">\(y\)</span> using <span class="math inline">\(p=59\)</span> physical features <span class="math inline">\(X\)</span> of the metals and the oxide supports.
-We will also compare OIS and non-OIS models and reproduce Figure 7 of
-the paper.</p>
-<p>In this dataset, we study the metal/oxide binding energy <span class="math inline">\(y\)</span> between 13 transition metals (<span class="math inline">\(\text{Cu, Ag, Au, Ni, Pd, Pt,}\)</span> <span class="math inline">\(\text{Co, Rh, Ir, Fe, Ru, Mn, and V}\)</span>) and
-7 oxide supports (<span class="math inline">\(\text{CeO}_2(111)\)</span>, <span class="math inline">\(\text{MgO}(100)\)</span>, <span class="math inline">\(\text{CeO}_2(110)\)</span>, <span class="math inline">\(\text{TbO}_2(111)\)</span>, <span class="math inline">\(\text{ZnO}(100)\)</span>, <span class="math inline">\(\text{TiO}_2(011)\)</span>, and <span class="math inline">\(\alpha\text{-Al}_2\text{O}_3(0001)\)</span>
-surfaces), making a total of <span class="math inline">\(n = 13 \times 7
-= 91\)</span> metal/oxide pairs. The physical features <span class="math inline">\(X\)</span> contain various physical properties of
-the transition metals and the oxide supports: Pauling Electronegativity
-(<span class="math inline">\(\chi_P\)</span>), <span class="math inline">\((n-1)^{\text{st}}\)</span> and <span class="math inline">\(n^{\text{th}}\)</span> Ionization Energies (<span class="math inline">\(\text{IE}_{n-1}\)</span>, <span class="math inline">\(\text{IE}_n\)</span>), Electron Affinity (<span class="math inline">\(\text{EA}\)</span>), <span class="math inline">\(\text{HOMO}\)</span> Energy, <span class="math inline">\(\text{LUMO}\)</span> Energy, Heat of Sublimation
+repo</a>. Here we model the metal/oxide binding energy (the response
+variable <span class="math inline">\(y\)</span>) using <span class="math inline">\(p=59\)</span> physical properties of the
+transition metals and the oxide supports (the primary features <span class="math inline">\(X\)</span>). The response variable <span class="math inline">\(y\)</span> and the primary features <span class="math inline">\(X\)</span> are treated as continuous variables,
+and we aim to use <strong>iBART</strong> to find an interpretable model
+with high predictive performance for the metal/oxide binding energy.</p>
+<p>A total of 13 transition metals (<span class="math inline">\(\text{Cu, Ag, Au, Ni, Pd, Pt,}\)</span> <span class="math inline">\(\text{Co, Rh, Ir, Fe, Ru, Mn, V}\)</span>) and 7
+oxide supports (<span class="math inline">\(\text{CeO}_2(111)\)</span>,
+<span class="math inline">\(\text{MgO}(100)\)</span>, <span class="math inline">\(\text{CeO}_2(110)\)</span>, <span class="math inline">\(\text{TbO}_2(111)\)</span>, <span class="math inline">\(\text{ZnO}(100)\)</span>, <span class="math inline">\(\text{TiO}_2(011)\)</span>, <span class="math inline">\(\alpha\text{-Al}_2\text{O}_3(0001)\)</span>) were
+studied in the dataset, making a total of <span class="math inline">\(n
+= 13 \times 7 = 91\)</span> metal/oxide pairs. The primary feature
+matrix <span class="math inline">\(X\)</span> contains various physical
+properties of the transition metals and the oxide supports including
+Pauling Electronegativity (<span class="math inline">\(\chi_P\)</span>),
+<span class="math inline">\((n-1)^{\text{th}}\)</span> and <span class="math inline">\(n^{\text{th}}\)</span> Ionization Energies (<span class="math inline">\(\text{IE}_{n-1}\)</span>, <span class="math inline">\(\text{IE}_n\)</span>), Electron Affinity (<span class="math inline">\(\text{EA}\)</span>), <span class="math inline">\(\text{HOMO}\)</span> Energy, <span class="math inline">\(\text{LUMO}\)</span> Energy, Heat of Sublimation
 (<span class="math inline">\(\Delta H_{\text{sub}}\)</span>), Oxidation
 Energy of oxide support (<span class="math inline">\(\Delta
 H_{\text{f,ox,bulk}}\)</span>), Oxide Formation Enthalpy (<span class="math inline">\(\Delta H_{\text{f,ox}}\)</span>), Zunger Orbital
@@ -364,9 +367,13 @@ Radius (<span class="math inline">\(r\)</span>), Atomic Number (<span class="mat
 Electron (<span class="math inline">\(\text{N}_{\text{val}}\)</span>),
 Oxygen Vacancy Energy of oxide support (<span class="math inline">\(\Delta\text{E}_{\text{vac}}\)</span>),
 Workfunction of oxide support <span class="math inline">\((\text{WF})\)</span>, Surface Energy (<span class="math inline">\(\gamma\)</span>), Coordination Number (<span class="math inline">\(\text{CN}\)</span>), and Bond Valence of surface
-metal atom (<span class="math inline">\(\text{BV}\)</span>). A detailed
-description of the 59 physical features <span class="math inline">\(X\)</span> can be find in pages 11–14 of <a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41929-018-0094-5/MediaObjects/41929_2018_94_MOESM1_ESM.pdf">the
-data supplementary materials</a>.</p>
+metal atom (<span class="math inline">\(\text{BV}\)</span>). Most of
+these physical properties are defined for both the transition metals and
+the oxide supports while a few of them are only defined for either the
+transition metals or the oxide supports. A detailed description of the
+59 primary features <span class="math inline">\(X\)</span> can be find
+in pages 11–14 of <a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41929-018-0094-5/MediaObjects/41929_2018_94_MOESM1_ESM.pdf">the
+data supplementary materials</a> published by O’Connor et al.</p>
 </div>
 <div id="package-and-data-loading" class="section level2">
 <h2>Package and Data Loading</h2>
@@ -433,7 +440,7 @@ example, <code>opt = c(&quot;all&quot;, &quot;all&quot;)</code> will apply all o
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="co">#&gt; BART iteration done! </span></span>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; LASSO descriptor selection... </span></span>
 <span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; L-zero regression... </span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; Total time: 202.201951980591 secs</span></span></code></pre></div>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; Total time: 196.992767810822 secs</span></span></code></pre></div>
 <p><code>iBART()</code> returns many interesting outputs. For example,
 <code>iBART_results$iBART_gen_size</code> and
 <code>iBART_results$iBART_sel_size</code> store dimension of the newly
