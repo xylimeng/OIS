@@ -25,7 +25,7 @@ Run `install.packages("glmnet")` within R. To reproduce results in the paper, pl
 
 ### Install iBART via devtools
 
-Run `devtools::install_github("xylimeng/OIS")` within R or run `devtools::install_github("xylimeng/OIS", build_vignettes = TRUE)` if you want to build the vignettes; this can take a while.
+Run `devtools::install_github("xylimeng/OIS", INSTALL_opts = "--no-multiarch")` within R or run `devtools::install_github("xylimeng/OIS", INSTALL_opts = "--no-multiarch", build_vignettes = TRUE)` if you want to build the vignettes; this can take a while.
 
 
 ## Reproduce iBART Results in Paper
